@@ -491,3 +491,142 @@ function printBio() {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeBioModal();
 });
+
+/* ══════════════════════════════════════════
+   CERTIFICATES AUTO-SCROLL (Marquee)
+   ══════════════════════════════════════════ */
+(function initCertAutoScroll() {
+  const certGrid = document.querySelector('.cert-grid');
+  const wrap = document.querySelector('.cert-carousel-wrap');
+  const prevBtn = document.getElementById('cert-prev');
+  const nextBtn = document.getElementById('cert-next');
+
+  if (!certGrid) return;
+
+  // Clone all children to allow for seamless infinite scrolling
+  const originalCards = Array.from(certGrid.children);
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    // Remove IDs if any existed to prevent duplicates
+    clone.removeAttribute('id');
+    certGrid.appendChild(clone);
+  });
+
+  let scrollPos = 0;
+  let isPaused = false;
+  let animationFrameId;
+  const speed = 1.0; // smooth and readable speed
+  let manualScrollTimeout;
+
+  function scrollStep() {
+    if (!isPaused) {
+      scrollPos += speed;
+      // If we've scrolled past the first half (the original set of cards), reset to 0 to loop smoothly
+      if (scrollPos >= certGrid.scrollWidth / 2) {
+        scrollPos = 0;
+      }
+      certGrid.scrollLeft = scrollPos;
+    }
+    animationFrameId = requestAnimationFrame(scrollStep);
+  }
+
+  // Pause scrolling on hover or touch anywhere on the carousel wrap
+  if (wrap) {
+    wrap.addEventListener('mouseenter', () => isPaused = true);
+    wrap.addEventListener('mouseleave', () => {
+      isPaused = false;
+      // Sync internal position with actual scroll position in case user scrolled manually
+      scrollPos = certGrid.scrollLeft;
+    });
+  } else {
+    certGrid.addEventListener('mouseenter', () => isPaused = true);
+    certGrid.addEventListener('mouseleave', () => {
+      isPaused = false;
+      scrollPos = certGrid.scrollLeft;
+    });
+  }
+  
+  certGrid.addEventListener('touchstart', () => isPaused = true, { passive: true });
+  certGrid.addEventListener('touchend', () => {
+    isPaused = false;
+    scrollPos = certGrid.scrollLeft;
+  }, { passive: true });
+
+  // Sync scrollPos when user manually scrolls
+  certGrid.addEventListener('scroll', () => {
+    if (isPaused) {
+      scrollPos = certGrid.scrollLeft;
+    }
+  }, { passive: true });
+
+  // Button Controls
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      isPaused = true;
+      certGrid.scrollBy({ left: -380, behavior: 'smooth' });
+      clearTimeout(manualScrollTimeout);
+      manualScrollTimeout = setTimeout(() => { isPaused = false; scrollPos = certGrid.scrollLeft; }, 600);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      isPaused = true;
+      certGrid.scrollBy({ left: 380, behavior: 'smooth' });
+      clearTimeout(manualScrollTimeout);
+      manualScrollTimeout = setTimeout(() => { isPaused = false; scrollPos = certGrid.scrollLeft; }, 600);
+    });
+  }
+
+  // Start the loop
+  animationFrameId = requestAnimationFrame(scrollStep);
+})();
+
+/* ══════════════════════════════════════════
+   CERTIFICATE VIEWER LOGIC
+   ══════════════════════════════════════════ */
+function openCertViewer(imgUrl) {
+  const overlay = document.getElementById('cert-viewer-overlay');
+  const viewerImg = document.getElementById('cert-viewer-img');
+  if (!overlay || !viewerImg) return;
+  
+  viewerImg.src = imgUrl;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCertViewer(e) {
+  // Close if clicking overlay or close button, not the image itself
+  if (e && e.target.closest('.cert-viewer-img-wrap')) return;
+  
+  const overlay = document.getElementById('cert-viewer-overlay');
+  if (!overlay) return;
+  
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close viewer on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const certOverlay = document.getElementById('cert-viewer-overlay');
+    if (certOverlay && certOverlay.classList.contains('open')) {
+      closeCertViewer();
+    }
+  }
+});
+
+// Intercept certificate link clicks for in-site viewing
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('.cert-link');
+  if (link) {
+    const url = link.getAttribute('href');
+    if (url && url !== '#') {
+      // Check if URL is an image or Cloudinary link
+      if (url.match(/\.(jpeg|jpg|gif|png|webp)$/i) || url.includes('cloudinary.com')) {
+        e.preventDefault();
+        openCertViewer(url);
+      }
+    }
+  }
+});
