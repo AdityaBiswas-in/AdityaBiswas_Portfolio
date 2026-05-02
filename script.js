@@ -489,8 +489,127 @@ function printBio() {
 
 // Close on Escape key
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeBioModal();
+  if (e.key === 'Escape') {
+    closeBioModal();
+    closeResumeModal();
+  }
 });
+
+/* ══════════════════════════════════════════
+   RESUME MODAL
+   ══════════════════════════════════════════ */
+let resumeZoomLevel = 1;
+const ZOOM_STEP = 0.2;
+const ZOOM_MIN  = 0.5;
+const ZOOM_MAX  = 3.0;
+
+function _applyResumeZoom() {
+  const img   = document.getElementById('resume-img');
+  const label = document.getElementById('resume-zoom-label');
+  if (!img) return;
+  
+  // Apply layout zoom so scrollbars appear
+  img.style.width = (resumeZoomLevel * 100) + '%';
+  img.style.maxWidth = 'none'; // Allow it to exceed container
+  
+  img.style.cursor = resumeZoomLevel > 1 ? 'zoom-out' : 'zoom-in';
+  if (label) label.textContent = Math.round(resumeZoomLevel * 100) + '%';
+}
+
+function resumeZoomIn()    { resumeZoomLevel = Math.min(ZOOM_MAX, +(resumeZoomLevel + ZOOM_STEP).toFixed(1)); _applyResumeZoom(); }
+function resumeZoomOut()   { resumeZoomLevel = Math.max(ZOOM_MIN, +(resumeZoomLevel - ZOOM_STEP).toFixed(1)); _applyResumeZoom(); }
+function resumeZoomReset() { resumeZoomLevel = 1; _applyResumeZoom(); }
+
+function openResumeModal() {
+  const overlay = document.getElementById('resume-overlay');
+  if (!overlay) return;
+  resumeZoomReset(); // always start at 100%
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const imgWrap = overlay.querySelector('.resume-img-wrap');
+  if (imgWrap) imgWrap.scrollTop = 0;
+}
+
+function closeResumeModal() {
+  const overlay = document.getElementById('resume-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeResumeOnOverlay(e) {
+  if (e.target === document.getElementById('resume-overlay')) {
+    closeResumeModal();
+  }
+}
+
+function printResume() {
+  window.print();
+}
+
+function printCert() {
+  window.print();
+}
+
+/**
+ * Robustly downloads a file from a URL by fetching it as a blob
+ */
+async function downloadFileFromUrl(url, filename) {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error('Download failed:', error);
+    // Fallback: try opening in new tab if fetch fails
+    window.open(url, '_blank');
+  }
+}
+
+function downloadResume() {
+  const img = document.getElementById('resume-img');
+  if (img && img.src) {
+    downloadFileFromUrl(img.src, 'Aditya_Biswas_Resume.png');
+  }
+}
+
+function downloadCert() {
+  const img = document.getElementById('cert-viewer-img');
+  if (img && img.src) {
+    // Extract a filename from the URL or use a default
+    const filename = 'Certificate_' + Date.now() + '.png';
+    downloadFileFromUrl(img.src, filename);
+  }
+}
+
+// Mouse wheel inside modal:
+//   Plain scroll  → pan image up / down
+//   Ctrl + scroll → zoom in / out
+(function () {
+  const wrap = document.getElementById('resume-img-wrap');
+  if (!wrap) return;
+  wrap.addEventListener('wheel', (e) => {
+    const overlay = document.getElementById('resume-overlay');
+    if (!overlay || !overlay.classList.contains('open')) return;
+
+    if (e.ctrlKey) {
+      // Ctrl held → zoom
+      e.preventDefault();
+      e.deltaY < 0 ? resumeZoomIn() : resumeZoomOut();
+    }
+    // No ctrlKey → let the browser scroll the wrap naturally (no preventDefault)
+  }, { passive: false });
+})();
+
 
 /* ══════════════════════════════════════════
    CERTIFICATES AUTO-SCROLL (Marquee)
