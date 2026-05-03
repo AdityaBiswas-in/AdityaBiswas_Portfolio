@@ -74,9 +74,9 @@
       <p class="hero-desc">
         Passionate about building <strong style="color:var(--purple-lt)">modern web experiences</strong> and crafting clean, functional interfaces.
       </p>
-      <a href="#about" class="btn-primary" id="explore-btn">
-        Explore My Work <i class="fas fa-arrow-down"></i>
-      </a>
+      <button class="btn-primary" id="resume-btn" onclick="openResumeModal()">
+        My Resume <i class="fas fa-file-alt"></i>
+      </button>
     </div>
   </div>
 
@@ -120,7 +120,7 @@
 
         <div class="about-stats">
           <a href="#projects" class="stat-item">
-            <span class="stat-num">4+</span>
+            <span class="stat-num">6+</span>
             <span class="stat-label">Projects Completed</span>
           </a>
           <a href="#skills" class="stat-item">
@@ -236,6 +236,46 @@
           </div>
         </div>
 
+        <!-- Page 05: Calculator Website -->
+        <div class="book-page" data-index="4">
+          <div class="book-page-inner">
+            <div class="book-page-front">
+              <div class="bp-number">05</div>
+              <div class="bp-content">
+                <span class="bp-tag">Web Tool</span>
+                <h3 class="bp-title">Calculator<br>Website</h3>
+                <p class="bp-tech-label">Technologies Used</p>
+                <p class="bp-tech">HTML, CSS, JavaScript.</p>
+                <a href="https://adityabiswas-in.github.io/CodeAlpha_Calculator/" target="_blank" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
+              </div>
+              <div class="bp-img-wrap">
+                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777716535/Screenshot_2026-05-02_153817_do3khn.png" alt="Calculator Website" class="bp-img" />
+              </div>
+              <div class="bp-glow"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 06: Image Gallery -->
+        <div class="book-page" data-index="5">
+          <div class="book-page-inner">
+            <div class="book-page-front">
+              <div class="bp-number">06</div>
+              <div class="bp-content">
+                <span class="bp-tag">Web App</span>
+                <h3 class="bp-title">Image<br>Gallery</h3>
+                <p class="bp-tech-label">Technologies Used</p>
+                <p class="bp-tech">HTML, CSS, JavaScript, Responsive Design.</p>
+                <a href="https://adityabiswas-in.github.io/CodeAlpha_ImageGallery/" target="_blank" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
+              </div>
+              <div class="bp-img-wrap">
+                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777662891/Screenshot_2026-05-02_004421_zdmcbr.png" alt="Image Gallery" class="bp-img" />
+              </div>
+              <div class="bp-glow"></div>
+            </div>
+          </div>
+        </div>
+
       </div><!-- /book-track -->
 
       <!-- Controls -->
@@ -252,6 +292,8 @@
         <button class="book-dot" data-idx="1" aria-label="Project 2"></button>
         <button class="book-dot" data-idx="2" aria-label="Project 3"></button>
         <button class="book-dot" data-idx="3" aria-label="Project 4"></button>
+        <button class="book-dot" data-idx="4" aria-label="Project 5"></button>
+        <button class="book-dot" data-idx="5" aria-label="Project 6"></button>
       </div>
 
     </div><!-- /book-carousel -->
@@ -977,13 +1019,56 @@
 
 <!-- ══════════ CERTIFICATE MODAL ══════════ -->
 <div id="cert-viewer-overlay" class="cert-viewer-overlay" onclick="closeCertViewer(event)">
-  <div class="cert-viewer-container">
-    <button class="cert-viewer-close" onclick="closeCertViewer(event)"><i class="fas fa-times"></i></button>
+  <div class="cert-viewer-container" onclick="event.stopPropagation()">
+    <div class="cert-viewer-header">
+      <span><i class="fas fa-certificate"></i> Certificate Viewer</span>
+      <div class="cert-viewer-actions">
+        <button class="cert-download-btn" onclick="downloadCert()" title="Download Image">
+          <i class="fas fa-download"></i> Download
+        </button>
+        <button class="cert-viewer-close-btn" onclick="closeCertViewer(event)" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
     <div class="cert-viewer-img-wrap">
       <img id="cert-viewer-img" src="" alt="Certificate View" />
     </div>
   </div>
 </div>
+
+<!-- ══════════ RESUME MODAL ══════════ -->
+<div class="resume-overlay" id="resume-overlay" onclick="closeResumeOnOverlay(event)">
+  <div class="resume-modal" id="resume-modal" role="dialog" aria-modal="true" aria-label="My Resume">
+    <div class="resume-modal-header">
+      <span><i class="fas fa-file-alt"></i> My Resume</span>
+      <div class="resume-modal-actions">
+        <div class="resume-zoom-controls">
+          <button class="resume-zoom-btn" onclick="resumeZoomOut()" title="Zoom Out" id="resume-zoom-out-btn">
+            <i class="fas fa-search-minus"></i>
+          </button>
+          <span class="resume-zoom-label" id="resume-zoom-label">100%</span>
+          <button class="resume-zoom-btn" onclick="resumeZoomIn()" title="Zoom In" id="resume-zoom-in-btn">
+            <i class="fas fa-search-plus"></i>
+          </button>
+          <button class="resume-zoom-btn resume-zoom-reset" onclick="resumeZoomReset()" title="Reset Zoom" id="resume-zoom-reset-btn">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </button>
+        </div>
+        <button class="resume-download-btn" onclick="downloadResume()" title="Download Image">
+          <i class="fas fa-download"></i> Download
+        </button>
+        <button class="resume-close" onclick="closeResumeModal()" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="resume-img-wrap" id="resume-img-wrap">
+      <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777720602/Screenshot_2026-05-02_164625_iotyqx.png" alt="Aditya Biswas Resume" class="resume-img" id="resume-img" />
+    </div>
+  </div>
+</div>
+
 
 <script src="script.js"></script>
 <script src="three-scene.js"></script>
