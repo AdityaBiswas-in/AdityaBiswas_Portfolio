@@ -166,77 +166,77 @@ function applyTilt(el, e, settings = { max: 10, perspective: 900 }) {
 }
 
 /* ══════════════════════════════════════════
-   BOOK CAROUSEL — Projects
+   BOOK CAROUSEL — General
    ══════════════════════════════════════════ */
-(function initBookCarousel() {
-  const track    = document.getElementById('book-track');
-  const prevBtn  = document.getElementById('book-prev');
-  const nextBtn  = document.getElementById('book-next');
-  const dotBtns  = document.querySelectorAll('.book-dot');
-  const pages    = document.querySelectorAll('.book-page');
-  if (!track || !pages.length) return;
+(function initBookCarousels() {
+  const carousels = document.querySelectorAll('.book-carousel');
+  if (!carousels.length) return;
 
-  let current   = 0;
-  const total   = pages.length;
-  let autoTimer = null;
-  let isPaused  = false; // true while cursor is over the carousel
+  carousels.forEach(carousel => {
+    const track    = carousel.querySelector('.book-track');
+    const prevBtn  = carousel.querySelector('.book-btn-prev');
+    const nextBtn  = carousel.querySelector('.book-btn-next');
+    const dotBtns  = carousel.querySelectorAll('.book-dot');
+    const pages    = carousel.querySelectorAll('.book-page');
+    if (!track || !pages.length) return;
 
-  /* ── slide to index ── */
-  function goTo(idx, dir) {
-    if (idx === current) return;
+    let current   = 0;
+    const total   = pages.length;
+    let autoTimer = null;
+    let isPaused  = false; // true while cursor is over the carousel
 
-    /* Remove old entrance class from all pages */
-    pages.forEach(p => p.classList.remove('entering-right', 'entering-left'));
+    /* ── slide to index ── */
+    function goTo(idx, dir) {
+      if (idx === current) return;
 
-    current = (idx + total) % total;
+      /* Remove old entrance class from all pages */
+      pages.forEach(p => p.classList.remove('entering-right', 'entering-left'));
 
-    /* Translate track */
-    track.style.transform = `translateX(-${current * 100}%)`;
+      current = (idx + total) % total;
 
-    /* Trigger entrance animation on incoming page */
-    void pages[current].offsetWidth; // force reflow
-    pages[current].classList.add(dir === 'right' ? 'entering-right' : 'entering-left');
-    setTimeout(() => pages[current].classList.remove('entering-right', 'entering-left'), 750);
+      /* Translate track */
+      track.style.transform = `translateX(-${current * 100}%)`;
 
-    /* Update dots */
-    dotBtns.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
+      /* Trigger entrance animation on incoming page */
+      void pages[current].offsetWidth; // force reflow
+      pages[current].classList.add(dir === 'right' ? 'entering-right' : 'entering-left');
+      setTimeout(() => pages[current].classList.remove('entering-right', 'entering-left'), 750);
 
-  /* ── auto-advance every 8 seconds ── */
-  function startAuto() {
-    clearInterval(autoTimer); // always clear first to avoid stacking
-    if (!isPaused) {
-      autoTimer = setInterval(() => goTo(current + 1, 'right'), 8000);
+      /* Update dots */
+      if(dotBtns.length) {
+        dotBtns.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
     }
-  }
 
-  prevBtn.addEventListener('click', () => { goTo(current - 1, 'left');  startAuto(); });
-  nextBtn.addEventListener('click', () => { goTo(current + 1, 'right'); startAuto(); });
-
-  dotBtns.forEach((btn, i) => {
-    btn.addEventListener('click', () => { goTo(i, i > current ? 'right' : 'left'); startAuto(); });
-  });
-
-  /* ── Keyboard ── */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { goTo(current + 1, 'right'); startAuto(); }
-    if (e.key === 'ArrowLeft')  { goTo(current - 1, 'left');  startAuto(); }
-  });
-
-  /* ── Touch / Swipe ── */
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend',   e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 50) {
-      dx < 0 ? goTo(current + 1, 'right') : goTo(current - 1, 'left');
-      startAuto();
+    /* ── auto-advance every 8 seconds ── */
+    function startAuto() {
+      clearInterval(autoTimer); // always clear first to avoid stacking
+      if (!isPaused) {
+        autoTimer = setInterval(() => goTo(current + 1, 'right'), 8000);
+      }
     }
-  }, { passive: true });
 
-  /* ── Pause on hover — reliable with isPaused flag ── */
-  const carousel = document.getElementById('book-carousel');
-  if (carousel) {
+    if(prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1, 'left');  startAuto(); });
+    if(nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1, 'right'); startAuto(); });
+
+    if(dotBtns.length) {
+      dotBtns.forEach((btn, i) => {
+        btn.addEventListener('click', () => { goTo(i, i > current ? 'right' : 'left'); startAuto(); });
+      });
+    }
+
+    /* ── Touch / Swipe ── */
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) {
+        dx < 0 ? goTo(current + 1, 'right') : goTo(current - 1, 'left');
+        startAuto();
+      }
+    }, { passive: true });
+
+    /* ── Pause on hover — reliable with isPaused flag ── */
     carousel.addEventListener('mouseenter', () => {
       isPaused = true;
       clearInterval(autoTimer);
@@ -246,9 +246,29 @@ function applyTilt(el, e, settings = { max: 10, perspective: 900 }) {
       isPaused = false;
       startAuto(); // only starts a fresh timer when truly leaving
     });
-  }
 
-  startAuto();
+    startAuto();
+  });
+
+  /* ── Keyboard - navigate visible carousel ── */
+  document.addEventListener('keydown', (e) => {
+    let visibleCarousel = null;
+    carousels.forEach(c => {
+      const rect = c.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        if(!visibleCarousel || Math.abs(rect.top) < Math.abs(visibleCarousel.getBoundingClientRect().top)) {
+           visibleCarousel = c;
+        }
+      }
+    });
+
+    if (visibleCarousel) {
+      const nextBtn  = visibleCarousel.querySelector('.book-btn-next');
+      const prevBtn  = visibleCarousel.querySelector('.book-btn-prev');
+      if (e.key === 'ArrowRight' && nextBtn) { nextBtn.click(); }
+      if (e.key === 'ArrowLeft' && prevBtn)  { prevBtn.click(); }
+    }
+  });
 })();
 
 /* ══════════════════════════════════════════
@@ -749,3 +769,117 @@ document.addEventListener('click', (e) => {
     }
   }
 });
+
+/* ══════════════════════════════════════════
+   REAL 3D BOOK (Education)
+   ══════════════════════════════════════════ */
+(function initRealBook() {
+  const book = document.getElementById('edu-real-book');
+  const prevBtn = document.getElementById('real-book-prev');
+  const nextBtn = document.getElementById('real-book-next');
+  if (!book) return;
+
+  const pages = Array.from(book.querySelectorAll('.real-page'));
+  let currentPage = 0;
+  const totalPages = pages.length;
+
+  function updateBook() {
+    // If we are at page 0, the book is closed. Otherwise it's open.
+    if (currentPage === 0) {
+      book.classList.remove('is-open');
+    } else if (currentPage > 0) {
+      book.classList.add('is-open');
+    }
+
+    pages.forEach((page, index) => {
+      if (index < currentPage) {
+        page.classList.add('flipped');
+      } else {
+        page.classList.remove('flipped');
+      }
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        updateBook();
+      }
+    });
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateBook();
+      }
+    });
+  }
+
+  // Allow clicking directly on pages to flip
+  pages.forEach((page, index) => {
+    const front = page.querySelector('.page-front');
+    const back = page.querySelector('.page-back');
+    if(front) {
+      front.addEventListener('click', () => {
+        if (currentPage === index) {
+          currentPage++;
+          updateBook();
+        }
+      });
+    }
+    if(back) {
+      back.addEventListener('click', () => {
+        if (currentPage === index + 1) {
+          currentPage--;
+          updateBook();
+        }
+      });
+    }
+  });
+
+})();
+
+/* ══════════════════════════════════════════
+   GLOBAL THEME ENGINE
+   ══════════════════════════════════════════ */
+(function initThemeEngine() {
+  const btn = document.getElementById('theme-btn');
+  if (!btn) return;
+
+  const themes = ['purple', 'cyan', 'emerald', 'crimson', 'gold'];
+
+  // Set active theme function
+  function setTheme(theme) {
+    // 1. Remove any theme class from body
+    document.body.classList.remove('theme-purple', 'theme-cyan', 'theme-emerald', 'theme-crimson', 'theme-gold');
+    
+    // 2. Add the active theme class
+    if (theme !== 'purple') {
+      document.body.classList.add(`theme-${theme}`);
+    }
+
+    // 3. Save to localStorage for persistent settings
+    localStorage.setItem('selected-theme', theme);
+
+    // 4. Fire a custom themeChanged event for the Three.js scene to react to
+    window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+  }
+
+  // Handle single button click theme toggle (cycles themes instantly)
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const currentTheme = localStorage.getItem('selected-theme') || 'gold';
+    let currentIndex = themes.indexOf(currentTheme);
+    if (currentIndex === -1) currentIndex = 0;
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const nextTheme = themes[nextIndex];
+    setTheme(nextTheme);
+  });
+
+  // Load saved theme on load (defaults to 'gold' on first visit)
+  const savedTheme = localStorage.getItem('selected-theme') || 'gold';
+  setTheme(savedTheme);
+})();
+

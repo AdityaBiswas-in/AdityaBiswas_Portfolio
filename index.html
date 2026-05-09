@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body>
+<body class="theme-gold">
 
 <!-- Custom Cursor -->
 <div class="cursor-dot"></div>
@@ -38,6 +38,21 @@
     <li><a href="#certificates" class="nav-link">Certificates</a></li>
     <li><a href="#contact"   class="nav-link">Contact</a></li>
   </ul>
+  
+  <!-- Theme Switcher -->
+  <div class="theme-switcher-container" id="theme-switcher">
+    <button class="theme-toggle-btn" id="theme-btn" aria-label="Change Color Theme" title="Switch Theme">
+      <i class="fas fa-palette"></i>
+    </button>
+    <div class="theme-menu" id="theme-menu">
+      <button class="theme-opt opt-purple active" data-theme="purple" title="Amethyst Nebula"><span class="dot d-purple"></span></button>
+      <button class="theme-opt opt-cyan" data-theme="cyan" title="Electric Cyan"><span class="dot d-cyan"></span></button>
+      <button class="theme-opt opt-emerald" data-theme="emerald" title="Emerald Matrix"><span class="dot d-emerald"></span></button>
+      <button class="theme-opt opt-crimson" data-theme="crimson" title="Rose Crimson"><span class="dot d-crimson"></span></button>
+      <button class="theme-opt opt-gold" data-theme="gold" title="Aureum Gold"><span class="dot d-gold"></span></button>
+    </div>
+  </div>
+
   <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
     <span></span><span></span><span></span>
   </div>
@@ -53,7 +68,7 @@
       <p class="hero-greeting">Hello, I'm</p>
       <h1 class="hero-name bio-trigger" onclick="openBioModal()" title="Click to view Bio-Data">Aditya<br>Biswas</h1>
       <div class="hero-social">
-        <a href="https://github.com/AdityaBiswas-in" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/AdityaBiswas-in" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/iadityabiswas" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://www.facebook.com/profile.php?id=100070387002576" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.instagram.com/adityabiswas_/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -323,59 +338,776 @@
 
 <!-- ══════════ EDUCATION ══════════ -->
 <section id="education">
+  <!-- 3D Canvas Background for Education Section -->
+  <canvas id="education-canvas"></canvas>
   <div class="container">
     <div class="section-header reveal">
       <p class="section-label">Academic Journey</p>
-      <h2 class="section-title">My <span>Education</span></h2>
+      <h2 class="section-title">My <span>Education</span> Book</h2>
+      <p class="section-label" style="margin-top:12px">Click the pages to read</p>
     </div>
 
-    <div class="edu-timeline">
+    <div class="real-book-container reveal">
+      <div class="real-book" id="edu-real-book">
+        
+        <!-- Cover -->
+        <div class="real-page cover" data-page="0">
+          <div class="page-face page-front">
+            <div class="cover-content cover-new">
+              <span class="cover-brand">ADITYA.</span>
 
-      <!-- Card 01: College -->
-      <div class="edu-item reveal">
-        <div class="edu-icon-wrap"><i class="fas fa-university"></i></div>
-        <div class="edu-left">
-          <span class="edu-year">2024 – 2028</span>
-        </div>
-        <div class="edu-right">
-          <p class="edu-institution">Bhawanipur Global Campus<br><span style="font-size:0.75em;opacity:0.7">(Formerly NSHM Knowledge Campus, Kolkata)</span></p>
-          <h3 class="edu-degree">Bachelor of Computer Applications | Pursuing</h3>
-          <p class="edu-desc">
-            Currently pursuing BCA with strong focus on full-stack web development, UI/UX design, and building real-world projects. Actively engaged in college cultural life — <strong>volunteered</strong> in the Freshers' Day celebration, handled <strong>accounts &amp; cash management</strong> during the Teachers' Day event, and delivered a <strong>stage performance</strong> at the Freshers' Day festivities, showcasing creativity alongside technical pursuits.
-          </p>
-        </div>
-      </div>
+              <!-- Animated background orbs -->
+              <div class="cover-orb cover-orb-1"></div>
+              <div class="cover-orb cover-orb-2"></div>
+              <div class="cover-orb cover-orb-3"></div>
 
-      <!-- Card 02: Class 12 -->
-      <div class="edu-item reveal">
-        <div class="edu-icon-wrap"><i class="fas fa-flask"></i></div>
-        <div class="edu-left">
-          <span class="edu-year">2023 – 2024</span>
-        </div>
-        <div class="edu-right">
-          <p class="edu-institution">Aranghata Upendra Memorial Institution</p>
-          <h3 class="edu-degree">Higher Secondary Education (WBCHSE)</h3>
-          <p class="edu-desc">
-            Science stream with <strong>Physics, Chemistry, Mathematics &amp; Biology</strong>. Developed strong analytical thinking and scientific reasoning skills. Beyond academics, actively participated in <strong>school cultural events</strong> — delivering memorable performances on stage and contributing to the vibrant school community.
-          </p>
-        </div>
-      </div>
+              <!-- Floating particles -->
+              <div class="cover-particles">
+                <span class="cp cp1"></span><span class="cp cp2"></span>
+                <span class="cp cp3"></span><span class="cp cp4"></span>
+                <span class="cp cp5"></span><span class="cp cp6"></span>
+              </div>
 
-      <!-- Card 03: Class 10 -->
-      <div class="edu-item reveal">
-        <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
-        <div class="edu-left">
-          <span class="edu-year">2021 – 2022</span>
-        </div>
-        <div class="edu-right">
-          <p class="edu-institution">Aranghata Upendra Memorial Institution</p>
-          <h3 class="edu-degree">Secondary Education (WBBSE)</h3>
-          <p class="edu-desc">
-            Completed Secondary education while actively engaging in school life beyond academics. A passionate sportsperson — competed in <strong>Cricket</strong> and <strong>Badminton</strong>, representing the school in inter-school tournaments. Actively participated in various school events and cultural programs, earning <strong>medals and accolades</strong> for athletic performance and school spirit.
-          </p>
-        </div>
-      </div>
+              <!-- 3D rotating icon emblem -->
+              <div class="cover-emblem-wrap">
+                <div class="cover-emblem">
+                  <i class="fas fa-code"></i>
+                </div>
+                <div class="cover-emblem-ring ring1"></div>
+                <div class="cover-emblem-ring ring2"></div>
+              </div>
 
+              <h3 class="cover-title cover-title-new">THE ONE UI<br><span>SAGA</span></h3>
+
+
+              <!-- Scan-line decoration -->
+              <div class="cover-scanline"></div>
+              <div class="cover-corner tl"></div>
+              <div class="cover-corner tr"></div>
+              <div class="cover-corner bl"></div>
+              <div class="cover-corner br"></div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="book-prologue-page">
+              <!-- Heading -->
+              <h2 class="prologue-heading">Prologue</h2>
+              <div class="prologue-divider">&#9670;</div>
+
+              <!-- Name -->
+              <h1 class="prologue-name">Aditya Biswas</h1>
+              <div class="prologue-divider"></div>
+
+              <!-- Tagline -->
+              <p class="prologue-tagline"><em>From classrooms to code &mdash; one commit at a time.</em></p>
+              <div class="prologue-divider" style="margin-bottom:16px"></div>
+
+              <!-- Body -->
+              <p class="prologue-body">Every great developer has an origin story. This volume chronicles the academic foundation that paved the way for my journey into the digital realm.</p>
+
+              <!-- Chapter list -->
+              <ul class="prologue-chapters">
+                <li><i class="fas fa-book-open"></i> <strong>Chapter 1</strong> <span class="ch-arrow">&rarr;</span> Secondary Education</li>
+                <li><i class="fas fa-book-open"></i> <strong>Chapter 2</strong> <span class="ch-arrow">&rarr;</span> Higher Secondary</li>
+                <li><i class="fas fa-book-open"></i> <strong>Chapter 3</strong> <span class="ch-arrow">&rarr;</span> BCA Journey</li>
+                <li><i class="fas fa-book-open"></i> <strong>Chapter 4</strong> <span class="ch-arrow">&rarr;</span> Projects &amp; Skills</li>
+              </ul>
+
+              <!-- Footer -->
+              <p class="prologue-footer"><em>Turn the page to explore...</em></p>
+              <div class="prologue-divider">&#9670;</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 1: Class 10 (Secondary) -->
+        <div class="real-page" data-page="1">
+          <div class="page-face page-front">
+            <div class="book-chapter-page">
+              <!-- Year badge -->
+              <div class="chp-year-badge">2021 &ndash; 2022</div>
+
+              <!-- Title -->
+              <h2 class="chp-title">Secondary Education<br>(Class 10th)</h2>
+
+              <!-- School -->
+              <p class="chp-label">MY SCHOOL:</p>
+              <p class="chp-school">ARANGHATA UPENDRA MEMORIAL INSTITUTION</p>
+
+              <!-- Board -->
+              <p class="chp-label">BOARD:</p>
+              <p class="chp-board">West Bengal Board of Secondary Education (WBBSE)</p>
+
+              <!-- Subjects -->
+              <p class="chp-label" style="margin-top:8px;">SUBJECTS:</p>
+              <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px;">
+                <span class="chp-subject-tag">English</span>
+                <span class="chp-subject-tag">Bengali</span>
+                <span class="chp-subject-tag">Mathematics</span>
+                <span class="chp-subject-tag">Physical Science</span>
+                <span class="chp-subject-tag">Life Science</span>
+                <span class="chp-subject-tag">History</span>
+                <span class="chp-subject-tag">Geography</span>
+              </div>
+
+              <!-- Quote -->
+              <p class="chp-quote">&ldquo;Where curiosity met discipline.&rdquo;</p>
+
+              <!-- School illustration -->
+              <div class="chp-illustration">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" class="school-svg">
+                  <!-- Sky -->
+                  <rect width="200" height="140" fill="#f4ecd8"/>
+                  <!-- Clouds -->
+                  <ellipse cx="160" cy="25" rx="18" ry="9" fill="#d8ccb8" opacity="0.7"/>
+                  <ellipse cx="175" cy="22" rx="12" ry="7" fill="#d8ccb8" opacity="0.7"/>
+                  <!-- Birds -->
+                  <path d="M155 15 q3-3 6 0" stroke="#8b6fa8" fill="none" stroke-width="1.5"/>
+                  <path d="M163 12 q3-3 6 0" stroke="#8b6fa8" fill="none" stroke-width="1.5"/>
+                  <!-- Ground -->
+                  <rect x="0" y="118" width="200" height="22" fill="#c9b99a"/>
+                  <!-- Building body -->
+                  <rect x="30" y="60" width="140" height="60" rx="2" fill="#c4a8d4"/>
+                  <!-- Roof -->
+                  <polygon points="25,62 100,28 175,62" fill="#a67db8"/>
+                  <!-- Flag pole -->
+                  <line x1="100" y1="28" x2="100" y2="10" stroke="#7a5c8a" stroke-width="2"/>
+                  <polygon points="100,10 116,16 100,22" fill="#a855f7"/>
+                  <!-- Windows row 1 -->
+                  <rect x="48" y="72" width="22" height="18" rx="2" fill="#e8d5f0" stroke="#a67db8" stroke-width="1"/>
+                  <rect x="89" y="72" width="22" height="18" rx="2" fill="#e8d5f0" stroke="#a67db8" stroke-width="1"/>
+                  <rect x="130" y="72" width="22" height="18" rx="2" fill="#e8d5f0" stroke="#a67db8" stroke-width="1"/>
+                  <!-- Door -->
+                  <rect x="83" y="92" width="34" height="28" rx="3" fill="#8b6fa8"/>
+                  <circle cx="113" cy="107" r="2" fill="#f4ecd8"/>
+                  <!-- Clock -->
+                  <circle cx="100" cy="48" r="8" fill="#f4ecd8" stroke="#a67db8" stroke-width="1.5"/>
+                  <line x1="100" y1="48" x2="100" y2="43" stroke="#7a5c8a" stroke-width="1.5"/>
+                  <line x1="100" y1="48" x2="104" y2="50" stroke="#7a5c8a" stroke-width="1.5"/>
+                  <!-- Trees -->
+                  <ellipse cx="22" cy="105" rx="14" ry="16" fill="#b89ec8"/>
+                  <rect x="20" y="112" width="4" height="8" fill="#8b6fa8"/>
+                  <ellipse cx="178" cy="105" rx="14" ry="16" fill="#b89ec8"/>
+                  <rect x="176" y="112" width="4" height="8" fill="#8b6fa8"/>
+                </svg>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="page-face page-back">
+                 <div class="page-inner-content" style="padding: 18px 20px; background: linear-gradient(160deg,#fdf8f0 0%,#f5ecd8 100%); height:100%; box-sizing:border-box; position:relative; overflow:hidden;">
+
+                <h3 class="bp-title" style="font-size:1.2rem; margin-top:0; margin-bottom:4px; color:#1a0f30; font-weight:900;">Experience &amp; Activities</h3>
+                <p style="font-size:0.78rem; line-height:1.4; margin-bottom:10px; color:#4a2b75; font-style:italic;">Beyond academics — an all-rounder on the field &amp; stage.</p>
+
+                <!-- Sports -->
+                <p style="font-size:0.68rem; letter-spacing:1.5px; margin-bottom:6px; color:#4a2b75; font-weight:800;">⚽ SPORTS &amp; HOBBIES</p>
+                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                  <div style="display:flex; align-items:center; gap:5px; background:rgba(168,85,247,0.15); border:1.5px solid rgba(168,85,247,0.5); border-radius:20px; padding:5px 12px;">
+                    <i class="fas fa-table-tennis" style="color:#7c3aed; font-size:0.82rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#4a1d96;">Badminton</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:5px; background:rgba(0,160,90,0.12); border:1.5px solid rgba(0,160,90,0.4); border-radius:20px; padding:5px 12px;">
+                    <i class="fas fa-futbol" style="color:#059669; font-size:0.82rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#065f46;">Football</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:5px; background:rgba(0,120,200,0.12); border:1.5px solid rgba(0,120,200,0.4); border-radius:20px; padding:5px 12px;">
+                    <i class="fas fa-baseball-ball" style="color:#0369a1; font-size:0.82rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#0c4a6e;">Cricket</span>
+                  </div>
+                </div>
+
+                <!-- Events -->
+                <p style="font-size:0.68rem; letter-spacing:1.5px; margin-bottom:6px; color:#4a2b75; font-weight:800;">🎭 SCHOOL EVENTS</p>
+                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                  <div style="display:flex; align-items:center; gap:5px; background:rgba(217,119,6,0.12); border:1.5px solid rgba(217,119,6,0.45); border-radius:20px; padding:5px 12px;">
+                    <i class="fas fa-theater-masks" style="color:#b45309; font-size:0.82rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#92400e;">Cultural Programs</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:5px; background:rgba(190,18,60,0.10); border:1.5px solid rgba(190,18,60,0.4); border-radius:20px; padding:5px 12px;">
+                    <i class="fas fa-medal" style="color:#be123c; font-size:0.82rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#9f1239;">Medals &amp; Accolades</span>
+                  </div>
+                </div>
+
+                <!-- Achievements -->
+                <p style="font-size:0.68rem; letter-spacing:1.5px; margin-bottom:6px; color:#4a2b75; font-weight:800;">🏅 ACHIEVEMENTS</p>
+                <div style="display:flex; flex-direction:column; gap:5px; margin-bottom:10px;">
+                  <div style="display:flex; align-items:center; gap:8px; background:rgba(250,200,0,0.18); border:1.5px solid rgba(217,160,0,0.6); border-radius:8px; padding:7px 12px;">
+                    <span style="font-size:1.1rem;">🥇</span>
+                    <div>
+                      <span style="font-size:0.82rem; font-weight:800; color:#92400e; display:block;">1st Place — Shot Put</span>
+                      <span style="font-size:0.67rem; color:#78350f; font-weight:600;">Annual School Sports Tournament</span>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:8px; background:rgba(100,130,200,0.12); border:1.5px solid rgba(100,130,200,0.45); border-radius:8px; padding:7px 12px;">
+                    <span style="font-size:1.1rem;">🥈</span>
+                    <div>
+                      <span style="font-size:0.82rem; font-weight:800; color:#1e3a5f; display:block;">2nd Place — Long Jump</span>
+                      <span style="font-size:0.67rem; color:#1e3a5f; font-weight:600;">Annual School Sports Tournament</span>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:8px; background:rgba(100,130,200,0.12); border:1.5px solid rgba(100,130,200,0.45); border-radius:8px; padding:7px 12px;">
+                    <span style="font-size:1.1rem;">🥈</span>
+                    <div>
+                      <span style="font-size:0.82rem; font-weight:800; color:#1e3a5f; display:block;">2nd Place — 100m Run</span>
+                      <span style="font-size:0.67rem; color:#1e3a5f; font-weight:600;">Annual School Sports Tournament</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="border-left:3px solid #7c3aed; padding-left:10px;">
+                  <p style="font-size:0.72rem; color:#2e1c47; line-height:1.5; margin:0; font-weight:600;">
+                    Represented school in <strong style="color:#6d28d9;">inter-school tournaments</strong> — earning recognition for athletic excellence &amp; school spirit.
+                  </p>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <!-- Page : Class 12 (Higher Secondary) -->
+        <div class="real-page" data-page="2">
+          <div class="page-face page-front">
+            <div class="book-chapter-page">
+              <!-- Year badge -->
+              <div class="chp-year-badge">2023 &ndash; 2024</div>
+
+              <!-- Title -->
+              <h2 class="chp-title">Higher Secondary Education<br>(Class 12th)</h2>
+
+              <!-- School -->
+              <p class="chp-label">MY SCHOOL:</p>
+              <p class="chp-school">ARANGHATA UPENDRA MEMORIAL INSTITUTION</p>
+
+              <!-- Board -->
+              <p class="chp-label">BOARD:</p>
+              <p class="chp-board">West Bengal Council of Higher Secondary Education (WBCHSE)</p>
+
+              <!-- Stream -->
+              <p class="chp-label" style="margin-top:8px;">STREAM:</p>
+              <p style="font-size:0.9rem; font-weight:700; color:#2d1f3d; margin:0 0 6px 0;">Science</p>
+
+              <!-- Subjects -->
+              <p class="chp-label" style="margin-top:4px;">SUBJECTS:</p>
+              <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px;">
+                <span class="chp-subject-tag">Physics</span>
+                <span class="chp-subject-tag">Chemistry</span>
+                <span class="chp-subject-tag">Mathematics</span>
+                <span class="chp-subject-tag">Biology</span>
+                <span class="chp-subject-tag">English</span>
+                <span class="chp-subject-tag">Bengali</span>
+              </div>
+
+              <!-- Quote -->
+              <p class="chp-quote">&ldquo;Where curiosity met discipline.&rdquo;</p>
+
+              <!-- School illustration -->
+              <div class="chp-illustration" style="margin-top: 10px;">
+                <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="school-svg" style="background: transparent; width: 100%; height: auto; max-height: 140px;">
+                  <!-- Definitions for gradients and shadows -->
+                  <defs>
+                    <!-- Soft cloud gradient -->
+                    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#decfe6" stop-opacity="0.8"/>
+                      <stop offset="100%" stop-color="#ebdff5" stop-opacity="0.4"/>
+                    </linearGradient>
+                    <!-- Building shadow gradient -->
+                    <linearGradient id="roofShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#4a3b5a" stop-opacity="0.25"/>
+                      <stop offset="100%" stop-color="#4a3b5a" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Background Birds -->
+                  <path d="M245,35 Q248,31 252,35 Q256,31 259,35" fill="none" stroke="#8b72a3" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M260,45 Q263,41 267,45 Q271,41 274,45" fill="none" stroke="#8b72a3" stroke-width="1.5" stroke-linecap="round"/>
+
+                  <!-- Background Clouds -->
+                  <!-- Left cloud -->
+                  <path d="M35,50 C35,42 45,35 55,35 C58,35 60,36 63,37 C67,31 75,27 82,27 C92,27 101,34 103,43 C106,42 108,42 110,42 C120,42 128,49 128,58 C128,60 127,62 126,63 L35,63 Z" fill="url(#cloudGrad)"/>
+                  <!-- Right cloud -->
+                  <path d="M275,65 C275,60 280,56 286,56 C288,56 289,56 291,57 C293,53 297,51 301,51 C307,51 312,55 313,60 C315,60 316,60 317,60 C322,60 326,64 326,69 L275,69 Z" fill="url(#cloudGrad)" opacity="0.6"/>
+
+                  <!-- Main Building Structure -->
+                  <!-- Left Wing -->
+                  <rect x="65" y="85" width="55" height="50" fill="#9d8cb5" rx="1"/>
+                  <polygon points="62,85 120,85 120,81 62,81" fill="#7d6693"/>
+
+                  <!-- Right Wing -->
+                  <rect x="200" y="85" width="55" height="50" fill="#9d8cb5" rx="1"/>
+                  <polygon points="198,85 256,85 256,81 198,81" fill="#7d6693"/>
+
+                  <!-- Central Tower -->
+                  <rect x="115" y="58" width="90" height="77" fill="#b9a9cc" rx="1"/>
+                  <!-- Main Gable Roof -->
+                  <polygon points="110,58 160,25 210,58" fill="#8d74a5"/>
+                  <!-- Shadow under Central Roof -->
+                  <polygon points="115,58 160,58 160,65 115,61" fill="#775e8c" opacity="0.4"/>
+                  <polygon points="160,58 205,58 205,61 160,65" fill="#775e8c" opacity="0.4"/>
+
+                  <!-- Side Wings Roof Shadows -->
+                  <rect x="65" y="85" width="55" height="4" fill="url(#roofShadow)"/>
+                  <rect x="200" y="85" width="55" height="4" fill="url(#roofShadow)"/>
+
+                  <!-- Central Tower Details -->
+                  <!-- Clock -->
+                  <circle cx="160" cy="46" r="13" fill="#ffffff" stroke="#decfe6" stroke-width="1"/>
+                  <!-- Clock Hands -->
+                  <line x1="160" y1="46" x2="160" y2="40" stroke="#70568a" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="160" y1="46" x2="165" y2="48" stroke="#70568a" stroke-width="1.6" stroke-linecap="round"/>
+                  <circle cx="160" cy="46" r="1.5" fill="#70568a"/>
+
+                  <!-- Central Tower Windows (3 in a row) -->
+                  <rect x="127" y="72" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="154" y="72" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="181" y="72" width="12" height="15" fill="#fdf6e6" rx="1"/>
+
+                  <!-- Central Door (Arch double door) -->
+                  <path d="M146,135 L146,115 C146,107 174,107 174,115 L174,135 Z" fill="#6a5282"/>
+                  <!-- Door split line -->
+                  <line x1="160" y1="110" x2="160" y2="135" stroke="#543e69" stroke-width="1"/>
+
+                  <!-- Left Wing Windows (2x2 grid) -->
+                  <rect x="76" y="93" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="97" y="93" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="76" y="114" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="97" y="114" width="12" height="15" fill="#fdf6e6" rx="1"/>
+
+                  <!-- Right Wing Windows (2x2 grid) -->
+                  <rect x="211" y="93" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="232" y="93" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="211" y="114" width="12" height="15" fill="#fdf6e6" rx="1"/>
+                  <rect x="232" y="114" width="12" height="15" fill="#fdf6e6" rx="1"/>
+
+                  <!-- Flag -->
+                  <line x1="160" y1="25" x2="160" y2="5" stroke="#7d6693" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M160,5 L178,11 L160,17 Z" fill="#aa8fd0"/>
+
+                  <!-- Ground baseline -->
+                  <line x1="15" y1="135" x2="305" y2="135" stroke="#6f568a" stroke-width="2" stroke-linecap="round"/>
+
+                  <!-- Stylized Left Tree -->
+                  <rect x="42" y="115" width="4" height="20" fill="#58436e" rx="1"/>
+                  <path d="M44,118 L41,121 M44,124 L47,121" stroke="#58436e" stroke-width="1" stroke-linecap="round"/>
+                  <circle cx="44" cy="104" r="15" fill="#b9a1cf" opacity="0.95"/>
+                  <!-- Branch pattern in the leaves -->
+                  <path d="M44,108 L44,98 M44,104 L40,101 M44,102 L48,100" stroke="#58436e" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+                  <!-- Stylized Right Tree -->
+                  <rect x="274" y="115" width="4" height="20" fill="#58436e" rx="1"/>
+                  <path d="M276,118 L273,121 M276,124 L279,121" stroke="#58436e" stroke-width="1" stroke-linecap="round"/>
+                  <circle cx="276" cy="104" r="15" fill="#b196c9" opacity="0.95"/>
+                  <!-- Branch pattern in the leaves -->
+                  <path d="M276,108 L276,98 M276,104 L272,101 M276,102 L280,100" stroke="#58436e" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+             <div class="page-inner-content" style="padding: 18px 20px;">
+                <h3 class="bp-title" style="font-size:1.2rem; margin-top:0; margin-bottom:6px; color:#1a0f30;">Experience &amp; Activities</h3>
+                <p class="bp-tech" style="font-size:0.82rem; line-height:1.5; margin-bottom:12px; color:#2e1c47; font-weight:500;">
+                  Science stream meets stage presence — a performer beyond the classroom.
+                </p>
+
+                <!-- School Events -->
+                <p class="chp-label" style="font-size:0.68rem; letter-spacing:1.5px; margin-bottom:7px; color:#4a2b75; font-weight:800;">🎭 SCHOOL EVENTS</p>
+                <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px;">
+                  <div style="display:flex; align-items:center; gap:6px; background:rgba(180,83,9,0.08); border:1px solid rgba(180,83,9,0.25); border-radius:20px; padding:5px 11px;">
+                    <i class="fas fa-theater-masks" style="color:#b45309; font-size:0.8rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#9a3412;">Cultural Programs</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; background:rgba(109,40,217,0.08); border:1px solid rgba(109,40,217,0.25); border-radius:20px; padding:5px 11px;">
+                    <i class="fas fa-music" style="color:#6d28d9; font-size:0.8rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#5b21b6;">Dance</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:6px; background:rgba(190,18,60,0.08); border:1px solid rgba(190,18,60,0.25); border-radius:20px; padding:5px 11px;">
+                    <i class="fas fa-medal" style="color:#be123c; font-size:0.8rem;"></i>
+                    <span style="font-size:0.78rem; font-weight:700; color:#be123c;">Medals &amp; Accolades</span>
+                  </div>
+                </div>
+
+                <!-- Participation -->
+                <p class="chp-label" style="font-size:0.68rem; letter-spacing:1.5px; margin-bottom:7px; color:#4a2b75; font-weight:800;">🌟 PARTICIPATION</p>
+                <div style="display:flex; flex-direction:column; gap:7px; margin-bottom:12px;">
+                  <!-- Cultural Events card -->
+                  <div style="display:flex; align-items:flex-start; gap:8px; background:rgba(109,40,217,0.05); border:1px solid rgba(109,40,217,0.2); border-radius:10px; padding:8px 12px;">
+                    <span style="font-size:1rem; line-height:1.4;">🎪</span>
+                    <div>
+                      <span style="font-size:0.8rem; font-weight:700; color:#1a0f30; display:block; line-height:1.3;">Participated in School Cultural Events</span>
+                      <span style="font-size:0.7rem; color:#4b3f5c; font-weight:500; line-height:1.4;">Actively represented the school in stage performances, celebrations, and annual cultural programs throughout the academic year.</span>
+                    </div>
+                  </div>
+                  <!-- Durga Puja card -->
+                  <div style="display:flex; align-items:flex-start; gap:8px; background:rgba(194,65,12,0.06); border:1px solid rgba(194,65,12,0.22); border-radius:10px; padding:8px 12px;">
+                    <span style="font-size:1rem; line-height:1.4;">🪔</span>
+                    <div>
+                      <span style="font-size:0.8rem; font-weight:700; color:#1a0f30; display:block; line-height:1.3;">School Durga Puja Cultural Event</span>
+                      <span style="font-size:0.7rem; color:#4b3f5c; font-weight:500; line-height:1.4;">Performed as part of a <strong style="color:#9a3412;">group</strong> during the school's annual Durga Puja celebration — a vibrant showcase of cultural spirit and teamwork.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Achievements -->
+                <p class="chp-label" style="font-size:0.68rem; letter-spacing:1.5px; margin-bottom:7px; color:#4a2b75; font-weight:800;">🏅 ACHIEVEMENTS</p>
+                <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;">
+                  <!-- 1st in Dance Competition -->
+                  <div style="display:flex; align-items:flex-start; gap:8px; background:rgba(217,119,6,0.08); border:1px solid rgba(217,119,6,0.3); border-radius:10px; padding:7px 12px;">
+                    <span style="font-size:1.1rem; line-height:1.4;">🥇</span>
+                    <div>
+                      <span style="font-size:0.82rem; font-weight:800; color:#9a3412; display:block; line-height:1.2;">1st Place &mdash; Dance Competition</span>
+                      <span style="font-size:0.68rem; color:#6b5a7e; font-weight:500; font-style:italic;">Group performance on the main stage</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="border-left:2.5px solid #6d28d9; padding-left:10px; margin-top:6px;">
+                  <p style="font-size:0.78rem; color:#2e1c47; line-height:1.5; margin:0; font-weight:500;">
+                    Balanced <strong style="color:#6d28d9; font-weight:700;">Science &amp; the Arts</strong> &mdash; excelling in studies while shining on stage at school festivals.
+                  </p>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <!-- Page 3: College (BCA) -->
+        <div class="real-page" data-page="3">
+          <div class="page-face page-front">
+            <div class="book-chapter-page" style="padding:14px 16px; overflow:hidden;">
+
+              <!-- Top bar: year tag only -->
+              <div class="bca-topbar">
+                <div class="bca-year-tag">2024 – 2028</div>
+              </div>
+
+              <!-- Title + Building illustration side by side -->
+              <div class="bca-header-row">
+                <div class="bca-header-text">
+                  <h2 class="bca-title">Bachelor of Computer Applications (BCA)</h2>
+                  <p class="bca-label">MY COLLEGE:</p>
+                  <p class="bca-college-name">BHAWANIPUR GLOBAL CAMPUS</p>
+                  <p class="bca-college-formerly">(FORMERLY KNOWN AS NSHM KNOWLEDGE CAMPUS, KOLKATA)</p>
+                  <p class="bca-label">MY UNIVERSITY:</p>
+                  <p class="bca-university-name">MAKAUT</p>
+                  <p class="bca-university-full">(Maulana Abul Kalam Azad University of Technology, WB)</p>
+                </div>
+              </div>
+
+              <!-- Journey Start badge -->
+              <div class="bca-journey-badge">
+                <i class="fas fa-calendar-alt bca-journey-icon"></i>
+                <span class="bca-journey-text">Journey Start &nbsp;—&nbsp; <span class="bca-journey-date">July 2024</span></span>
+              </div>
+
+              <!-- Learn → Explore → Evolve timeline -->
+              <div class="bca-timeline">
+                <div class="bca-timeline-line-row">
+                  <div class="bca-timeline-dot-left"></div>
+                  <div class="bca-timeline-line"></div>
+                  <div class="bca-timeline-dot-right"></div>
+                </div>
+                <div class="bca-timeline-steps">
+                  <div class="bca-step">
+                    <div class="bca-step-icon">
+                      <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="bca-step-title">Learn</div>
+                    <div class="bca-step-desc">Building strong academic foundations</div>
+                  </div>
+                  <div class="bca-step">
+                    <div class="bca-step-icon">
+                      <i class="fas fa-code"></i>
+                    </div>
+                    <div class="bca-step-title">Explore</div>
+                    <div class="bca-step-desc">Hands-on coding, projects &amp; problem solving</div>
+                  </div>
+                  <div class="bca-step">
+                    <div class="bca-step-icon evolve">
+                      <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="bca-step-title">Evolve</div>
+                    <div class="bca-step-desc">Growing skills, shaping the future</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Two-column: Subjects + Tech Focus -->
+              <div class="bca-two-col">
+
+                <!-- Subjects I'm Exploring -->
+                <div class="bca-subjects-col">
+                  <p class="bca-section-label">📚 SUBJECTS I'M EXPLORING</p>
+                  <div class="bca-subjects-grid">
+                    <div class="bca-subject-tile"><i class="fas fa-terminal"></i><span>C Programming</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-database"></i><span>Data Structures</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-server"></i><span>DBMS</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-globe"></i><span>Web Tech</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-cubes"></i><span>OOP</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-microchip"></i><span>OS</span></div>
+                    <div class="bca-subject-tile"><i class="fab fa-python"></i><span>Python</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-square-root-alt"></i><span>Maths</span></div>
+                    <div class="bca-subject-tile"><i class="fas fa-project-diagram"></i><span>Soft. Engg.</span></div>
+                  </div>
+                </div>
+
+                <!-- Tech Focus -->
+                <div class="bca-tech-col">
+                  <p class="bca-section-label">💻 TECH FOCUS</p>
+                  <div class="bca-tech-badges">
+                    <div class="bca-badge-html">HTML</div>
+                    <div class="bca-badge-css">CSS</div>
+                    <div class="bca-badge-js">JS</div>
+                  </div>
+                  <div class="bca-tech-bullets">
+                    <div class="bca-tech-bullet">
+                      <span class="bca-bullet-arrow">▸</span>
+                      <span class="bca-bullet-text">Building responsive &amp; user-friendly web interfaces</span>
+                    </div>
+                    <div class="bca-tech-bullet">
+                      <span class="bca-bullet-arrow">▸</span>
+                      <span class="bca-bullet-text">Exploring modern web technologies &amp; frameworks</span>
+                    </div>
+                    <div class="bca-tech-bullet">
+                      <span class="bca-bullet-arrow">▸</span>
+                      <span class="bca-bullet-text">Turning ideas into interactive digital experiences</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Future Ambitions -->
+              <div class="bca-ambitions">
+                <i class="fas fa-bullseye bca-ambitions-icon"></i>
+                <div>
+                  <p class="bca-ambitions-title">FUTURE AMBITIONS</p>
+                  <p class="bca-ambitions-text">To become a skilled software developer, create impactful digital solutions, and contribute to the tech industry with innovation and integrity.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="eap-page">
+
+              <!-- Title -->
+              <div class="eap-header">
+                <div class="eap-dot"></div>
+                <div>
+                  <h2 class="eap-title">Experience &amp; Activities</h2>
+                  <p class="eap-subtitle">Beyond the classroom — real events, real impact.</p>
+                </div>
+              </div>
+
+              <!-- College Events Pills -->
+              <div class="eap-section-header">🎓 &nbsp;COLLEGE EVENTS</div>
+              <div class="eap-pills">
+                <span class="eap-pill">🏆 Competitions</span>
+                <span class="eap-pill">📊 Conferences</span>
+                <span class="eap-pill">🎭 Volunteering</span>
+              </div>
+
+              <!-- Participation Cards -->
+              <div class="eap-section-header">📅 &nbsp;PARTICIPATION</div>
+              <div class="eap-cards">
+                <div class="eap-card">
+                  <span class="eap-card-icon">📊</span>
+                  <div>
+                    <p class="eap-card-title">Analytics Global Conference (3rd &amp; 4th)</p>
+                    <p class="eap-card-desc">Attended both editions — Mar 2025 &amp; Mar 2026.</p>
+                  </div>
+                </div>
+                <div class="eap-card">
+                  <span class="eap-card-icon">💰</span>
+                  <div>
+                    <p class="eap-card-title"> Finance Team — BCA Teachers' Day 2025</p>
+                    <p class="eap-card-desc">Managed financial transactions &amp; online payments.</p>
+                  </div>
+                </div>
+                <div class="eap-card">
+                  <span class="eap-card-icon">🎤</span>
+                  <div>
+                    <p class="eap-card-title">Group Song — Fresher's Party 2024</p>
+                    <p class="eap-card-desc">Performed a group song on stage at the Welcome event.</p>
+                  </div>
+                </div>
+                <div class="eap-card">
+                  <span class="eap-card-icon">🙋</span>
+                  <div>
+                    <p class="eap-card-title"> Security — Fresher's Party 2025</p>
+                    <p class="eap-card-desc">Volunteered as Security Team Member for the event</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Achievement -->
+              <div class="eap-section-header">🏅 &nbsp;ACHIEVEMENT</div>
+              <div class="eap-achievement-card">
+                <span class="eap-achieve-icon">🥈</span>
+                <div>
+                  <p class="eap-achieve-title">2nd Place — Earth Day Celebrations</p>
+                  <p class="eap-achieve-sub">NSHM Knowledge Campus, Kolkata &nbsp;|&nbsp; April 2025</p>
+                </div>
+              </div>
+
+              <!-- Quote -->
+              <div class="eap-section-header" style="margin-top:2px;">💻 &nbsp;PROJECTS</div>
+              <div class="eap-proj-grid">
+                <div class="eap-proj-item"><span>🛒</span> E Commerce Website</div>
+                <div class="eap-proj-item"><span>🏫</span> College Dashboard</div>
+                <div class="eap-proj-item"><span>🌐</span> Portfolio Website</div>
+                <div class="eap-proj-item"><span>🧮</span> Calculator</div>
+                <div class="eap-proj-item"><span>🖼️</span> Image Gallery</div>
+                <div class="eap-proj-item"><span>🎵</span> Music Player</div>
+                <div class="eap-proj-item"><span>🏛️</span> College Website Replica</div>
+                <div class="eap-proj-item"><span>🎮</span> Imposter Game</div>
+              </div>
+
+              <!-- Quote -->
+              <div class="eap-quote">Actively engaged beyond academics — blending learning with real-world participation.</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 4: Beyond Academics & Epilogue -->
+        <div class="real-page" data-page="4">
+          <!-- FRONT: Beyond Academics -->
+          <div class="page-face page-front">
+            <div class="eap-page">
+
+              <!-- Header -->
+              <div class="eap-header">
+                <div class="eap-dot"></div>
+                <div>
+                  <h2 class="eap-title">Beyond Academics</h2>
+                  <p class="eap-subtitle">Certificates earned &amp; activities beyond the classroom.</p>
+                </div>
+              </div>
+
+              <!-- Certificates -->
+              <div class="eap-section-header">🏅 &nbsp;KEY CERTIFICATES</div>
+              <div class="cert-grid-2col">
+                <div class="cert-item-sm"><p class="cert-name-sm">AWS Cloud Financial Mgmt.</p><p class="cert-meta-sm">AWS Skill Builder</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Python For Programmers</p><p class="cert-meta-sm">IBM SkillsBuild</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Web Development Fundamentals</p><p class="cert-meta-sm">IBM SkillsBuild</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Power BI Full Course</p><p class="cert-meta-sm">Cursa / LearnIt</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Analytics Global Conf. 2026</p><p class="cert-meta-sm">NSHM NICA</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Analytics Global Conf. 2025</p><p class="cert-meta-sm">NSHM NICA</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Research Writing Workshop</p><p class="cert-meta-sm">Analytics Society of India</p></div>
+                <div class="cert-item-sm"><p class="cert-name-sm">Bitcoin India Tour 2025</p><p class="cert-meta-sm">Bitcoin Bharat</p></div>
+              </div>
+
+              <!-- Beyond Activities -->
+              <div class="eap-section-header">🌟 &nbsp;BEYOND ACTIVITIES</div>
+              <div class="eap-cards">
+                <div class="eap-card">
+                  <span class="eap-card-icon">🎤</span>
+                  <div>
+                    <p class="eap-card-title">Group Song Performance</p>
+                    <p class="eap-card-desc">Performed on stage at BCA Fresher's Party 2024.</p>
+                  </div>
+                </div>
+                <div class="eap-card">
+                  <span class="eap-card-icon">🎭</span>
+                  <div>
+                    <p class="eap-card-title">Street Play — Earth Day 2025</p>
+                    <p class="eap-card-desc">Won 🥈 2nd Place at NSHM Language Centre event.</p>
+                  </div>
+                </div>
+                <div class="eap-card">
+                  <span class="eap-card-icon">🙋</span>
+                  <div>
+                    <p class="eap-card-title">Event Volunteer — Fresher's 2025</p>
+                    <p class="eap-card-desc">Served as Security Team volunteer at NSHM NICA.</p>
+                  </div>
+                </div>
+                <div class="eap-card">
+                  <span class="eap-card-icon">💰</span>
+                  <div>
+                    <p class="eap-card-title">Finance Team — Teachers' Day 2025</p>
+                    <p class="eap-card-desc">Managed transactions &amp; payments for the event.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BACK: Epilogue -->
+          <div class="page-face page-back">
+            <div class="page-inner-content" style="display:flex; flex-direction:column; justify-content:space-between; height:100%; box-sizing:border-box; padding: 25px 20px;">
+              <div>
+                <span class="bp-tag">THE FUTURE</span>
+                <h3 class="bp-title" style="margin-top:10px; margin-bottom:12px;">The Next Chapter</h3>
+                <p class="bp-tech-label">Looking Ahead</p>
+                <p class="bp-tech" style="font-size:0.78rem; line-height:1.5;">
+                  As I continue to hone my craft in the world of web development, my goal is to build digital experiences that are not only functional but visually stunning. The foundation of my education has prepared me for the challenges ahead, and I am excited to see where the code takes me next.<br><br><strong>Stay tuned.</strong>
+                </p>
+              </div>
+              <div class="text-center" style="margin-top:auto; padding-top:20px; border-top:1.5px dashed rgba(168,85,247,0.2);">
+                <h4 class="bp-title" style="color:#a855f7; font-size:1.1rem; margin-bottom:0;">To Be Continued...</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 5: Back Cover -->
+        <div class="real-page cover" data-page="5">
+          <div class="page-face page-front" style="background: #f4ecd8; border-right: 1px solid #aaa;">
+            <div class="page-inner-content">
+              <!-- Blank inside of back cover -->
+            </div>
+          </div>
+          <div class="page-face page-back back-cover-animated">
+             <div class="bc-orb bc-orb1"></div>
+             <div class="bc-orb bc-orb2"></div>
+
+             <!-- Animated grid floor -->
+             <div class="bc-grid"></div>
+
+             <!-- Floating rune particles -->
+             <div class="bc-runes">
+               <span class="br br1">&lt;/&gt;</span>
+               <span class="br br2">{}</span>
+               <span class="br br3">01</span>
+               <span class="br br4">∞</span>
+               <span class="br br5">⟨⟩</span>
+               <span class="br br6">λ</span>
+             </div>
+
+             <!-- 3D Rotating DNA / helix ring -->
+             <div class="bc-helix-wrap">
+               <div class="bc-helix">
+                 <div class="bc-ring r1"></div>
+                 <div class="bc-ring r2"></div>
+                 <div class="bc-ring r3"></div>
+                 <div class="bc-ring r4"></div>
+               </div>
+               <div class="bc-helix-glow"></div>
+             </div>
+
+             <!-- Text content -->
+             <div class="bc-text">
+                <!-- <p class="bc-label">DEVELOPER PORTFOLIO</p> -->
+                <h2 class="bc-title" style="letter-spacing: 4px;">THE END</h2>
+               <div class="bc-divider"></div>
+               <p class="bc-sub">The One UI Saga</p>
+             </div>
+
+             <!-- Scanline -->
+             <div class="bc-scanline"></div>
+             <!-- Corners -->
+             <div class="cover-corner tl"></div>
+             <div class="cover-corner tr"></div>
+             <div class="cover-corner bl"></div>
+             <div class="cover-corner br"></div>
+          </div>
+        </div>
+
+      </div><!-- /real-book -->
+
+      <!-- Buttons removed - click the pages directly to flip -->
     </div>
   </div>
 </section>
@@ -861,7 +1593,7 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════ FOOTER ══════════ -->
 <footer class="reveal">
   <div class="container footer-container">
     <div class="footer-flex">
@@ -903,12 +1635,6 @@
 
 <!-- Toast Container -->
 <div id="toast-container"></div>
-
-
-
-
-
-
 
 
 
@@ -1091,7 +1817,8 @@
 </div>
 
 
-<script src="script.js"></script>
-<script src="three-scene.js"></script>
+<script src="three-scene.js?v=1.1"></script>
+<script src="education-scene.js?v=1.1"></script>
+<script src="script.js?v=1.1"></script>
 </body>
 </html>

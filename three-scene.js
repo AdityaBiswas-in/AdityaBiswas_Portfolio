@@ -22,16 +22,27 @@
     mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
     mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
   });
+  /* ── Color palettes matching the portfolio themes ── */
+  const THEME_COLORS = {
+    purple:  [0x7c3aed, 0xa855f7, 0xc084fc, 0x4c1d95, 0x6d28d9, 0x8b5cf6],
+    cyan:    [0x2563eb, 0x3b82f6, 0x00ccff, 0x1e3a8a, 0x1d4ed8, 0x3b82f6],
+    emerald: [0x059669, 0x10b981, 0x34d399, 0x047857, 0x064e3b, 0x10b981],
+    crimson: [0xe50914, 0xff2c38, 0xff4d5a, 0x7f1d1d, 0x991b1b, 0xff2c38],
+    gold:    [0xd4af37, 0xf9e7b9, 0xfacc15, 0xaa7c11, 0xca8a04, 0xfacc15]
+  };
 
-  /* ── Color palette matching the portfolio ── */
-  const COLORS = [
-    0x7c3aed,  // purple
-    0xa855f7,  // purple-lt
-    0xc084fc,  // accent
-    0x4c1d95,  // purple-dim
-    0x6d28d9,
-    0x8b5cf6,
-  ];
+  function getCurrentTheme() {
+    const saved = localStorage.getItem('selected-theme');
+    if (saved && THEME_COLORS[saved]) return saved;
+    if (document.body.classList.contains('theme-cyan')) return 'cyan';
+    if (document.body.classList.contains('theme-emerald')) return 'emerald';
+    if (document.body.classList.contains('theme-crimson')) return 'crimson';
+    if (document.body.classList.contains('theme-gold')) return 'gold';
+    return 'gold';
+  }
+
+  let currentTheme = getCurrentTheme();
+  let COLORS = THEME_COLORS[currentTheme];
 
   /* ── Floating geometric nodes (icosahedra, octahedra, tetrahedra) ── */
   const geoTypes = [
@@ -113,11 +124,10 @@
 
   /* ── Connection lines between nearby nodes ── */
   const lineMat = new THREE.LineBasicMaterial({
-    color: 0x7c3aed,
+    color: COLORS[0],
     transparent: true,
     opacity: 0.08,
   });
-
   const lineGroup = new THREE.Group();
   scene.add(lineGroup);
 
@@ -188,4 +198,32 @@
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
+
+  /* ── Dynamic Theme Switching Handler ── */
+  window.addEventListener('themeChanged', (e) => {
+    const newTheme = e.detail.theme;
+    const newHexColors = THEME_COLORS[newTheme] || THEME_COLORS.purple;
+    COLORS = newHexColors;
+
+    // Update lines material color
+    lineMat.color.setHex(newHexColors[0]);
+
+    // Update all existing floating geometric nodes
+    nodes.forEach(mesh => {
+      const color = newHexColors[Math.floor(Math.random() * newHexColors.length)];
+      mesh.material.color.setHex(color);
+    });
+
+    // Update all existing particle starfield colors
+    const colorsAttr = particleGeo.getAttribute('color');
+    if (colorsAttr) {
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const hex = newHexColors[Math.floor(Math.random() * newHexColors.length)];
+        const c = new THREE.Color(hex);
+        colorsAttr.setXYZ(i, c.r, c.g, c.b);
+      }
+      colorsAttr.needsUpdate = true;
+    }
+  });
 })();
+
