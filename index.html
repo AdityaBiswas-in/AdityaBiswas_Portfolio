@@ -2139,31 +2139,16 @@
     <div class="resume-modal-header">
       <span><i class="fas fa-file-alt"></i> My Resume</span>
       <div class="resume-modal-actions">
-        <div class="resume-zoom-controls">
-          <button class="resume-zoom-btn" onclick="resumeZoomOut()" title="Zoom Out" id="resume-zoom-out-btn">
-            <i class="fas fa-search-minus"></i>
-          </button>
-          <span class="resume-zoom-label" id="resume-zoom-label">100%</span>
-          <button class="resume-zoom-btn" onclick="resumeZoomIn()" title="Zoom In" id="resume-zoom-in-btn">
-            <i class="fas fa-search-plus"></i>
-          </button>
-          <button class="resume-zoom-btn resume-zoom-reset" onclick="resumeZoomReset()" title="Reset Zoom" id="resume-zoom-reset-btn">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </button>
-        </div>
         <a href="https://drive.google.com/file/d/1RD4buv7nxYVHZ-z1ytoF9JmjDRajEorK/view?usp=drive_link" target="_blank" rel="noopener" class="resume-download-btn" title="View Full Resume on Google Drive" style="text-decoration: none;">
           <i class="fas fa-external-link-alt"></i> View on Drive
         </a>
-        <button class="resume-download-btn" onclick="downloadResume()" title="Download Image">
-          <i class="fas fa-download"></i> Download
-        </button>
         <button class="resume-close" onclick="closeResumeModal()" aria-label="Close">
           <i class="fas fa-times"></i>
         </button>
       </div>
     </div>
-    <div class="resume-img-wrap" id="resume-img-wrap">
-      <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777720602/Screenshot_2026-05-02_164625_iotyqx.png" alt="Aditya Biswas Resume" class="resume-img" id="resume-img" />
+    <div class="resume-img-wrap" id="resume-img-wrap" style="padding: 0; display: block;">
+      <iframe src="Aditya_Biswas_Resume.pdf" class="resume-iframe" id="resume-iframe"></iframe>
     </div>
   </div>
 </div>
