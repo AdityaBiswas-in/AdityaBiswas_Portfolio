@@ -15,7 +15,7 @@ A fully responsive, interactive Developer Portfolio built with pure **HTML5, CSS
 
 ## 🔗 Live Demo
 
-🌐 **[Click Here](https://adityabiswas-in.github.io/AdityaBiswas-Portfolio/)**
+🌐 **[Click Here](https://adityabiswas-in.github.io/AdityaBiswas_Portfolio/)**
 
 ---
 
