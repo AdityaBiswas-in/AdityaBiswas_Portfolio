@@ -6448,6 +6448,7 @@ footer {
 /* ══ LEFT PANEL ══ */
 #hero .hero-left {
   position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -6774,6 +6775,8 @@ footer {
 
 /* ══ RIGHT PANEL ══ */
 #hero .hero-right {
+  position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   gap: 10px;
