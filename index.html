@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aditya Biswas | Developer Portfolio</title>
+  <title>Aditya Biswas | Portfolio</title>
   <meta name="description" content="Aditya Biswas — Creative Developer & Designer. Passionate about building modern web apps and dashboards." />
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1779432739/6f4829f8f556f4d582b50abda9b2b55b_dp9cey.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -322,177 +322,189 @@
   <div class="container">
     <div class="section-header reveal">
       <h2 class="section-title">I Make Incredible<br><span>Projects</span></h2>
-      <p class="section-label section-label-ext-3">Flip through my work</p>
+      <p class="section-label section-label-ext-3">Explore my work</p>
     </div>
 
-    <!-- Book Carousel -->
-    <div class="book-carousel" id="book-carousel">
+    <!-- Category Filter Bar -->
+    <div class="projects-filter-bar reveal">
+      <button class="filter-btn active" data-filter="all" id="filter-all">All</button>
+      <button class="filter-btn" data-filter="webapp" id="filter-webapp">Web Apps</button>
+      <button class="filter-btn" data-filter="dashboard" id="filter-dashboard">Dashboards & Tools</button>
+      <button class="filter-btn" data-filter="website" id="filter-website">Websites</button>
+    </div>
 
-      <!-- Track -->
-      <div class="book-track" id="book-track">
+    <!-- Projects Grid -->
+    <div class="projects-grid" id="projects-grid">
 
-        <!-- Page 01: College Website Replica -->
-        <div class="book-page" data-index="0">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">01</div>
-              <div class="bp-content">
-                <span class="bp-tag">Website</span>
-                <h3 class="bp-title">College Website<br>Replica</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS.</p>
-                <a href="https://adityabiswas-in.github.io/AdityaBiswas_Collage-Website-Replica/" target="_blank" rel="noopener" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777468076/Screenshot_2026-04-29_182537_boj1rz.png" alt="College Website Replica" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
+      <!-- Project 01: AuraBeats Music Player -->
+      <div class="project-card tilt-card reveal" data-category="webapp"
+           data-title="AuraBeats Music Player"
+           data-tag="Music Player"
+           data-tech="HTML, CSS, JavaScript, Web Audio API"
+           data-link="https://adityabiswas-in.github.io/AdityaBiswas_AuraBeats/"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777793605/Screenshot_2026-05-03_130258_uyuobm.png"
+           data-desc="A premium, interactive web-based music player featuring a custom glassmorphic user interface, playlist management, and advanced audio control using the Web Audio API."
+           data-features="Interactive audio visual waves;Custom playlist manager;Volume control & track scrubbing;Smooth sliding transitions">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777793605/Screenshot_2026-05-03_130258_uyuobm.png" alt="AuraBeats Music Player" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
             </div>
           </div>
-        </div>
-
-        <!-- Page 02: E-Commerce -->
-        <div class="book-page" data-index="1">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">02</div>
-              <div class="bp-content">
-                <span class="bp-tag">Web App</span>
-                <h3 class="bp-title">E-Commerce<br>Website</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS, JavaScript.</p>
-                <a href="https://the-archive-luxury.netlify.app/" target="_blank" rel="noopener" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528188/Screenshot_2026-04-18_202426_yg3enu.png" alt="E-Commerce Website" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
-            </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Music Player</span>
+            <h3 class="project-card-title">AuraBeats Music Player</h3>
+            <p class="project-card-tech">HTML, CSS, JS, Web Audio</p>
           </div>
         </div>
-
-        <!-- Page 03: College Dashboard -->
-        <div class="book-page" data-index="2">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">03</div>
-              <div class="bp-content">
-                <span class="bp-tag">Dashboard</span>
-                <h3 class="bp-title">College Management<br>Dashboard</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS, JavaScript, Responsive Design.</p>
-                <a href="https://adityabiswas-in.github.io/AdityaBiswas_Collage-Management-Dashboard/" target="_blank" rel="noopener" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528942/college_dashboard_project_wpsemb.png" alt="College Management Dashboard" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Page 04: This Portfolio -->
-        <div class="book-page" data-index="3">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">04</div>
-              <div class="bp-content">
-                <span class="bp-tag">Portfolio</span>
-                <h3 class="bp-title">Developer<br>Portfolio</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS, JavaScript, Responsive Design, Interactive UI.</p>
-                <a href="#hero" class="bp-link"><i class="fas fa-eye"></i> You're Here</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528941/Portfolio_image_nhrkdv.png" alt="Developer Portfolio" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Page 05: Calculator Website -->
-        <div class="book-page" data-index="4">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">05</div>
-              <div class="bp-content">
-                <span class="bp-tag">Web Tool</span>
-                <h3 class="bp-title">Calculator<br>Website</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS, JavaScript.</p>
-                <a href="https://adityabiswas-in.github.io/AdityaBiswas_Calculator/" target="_blank" rel="noopener" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777716535/Screenshot_2026-05-02_153817_do3khn.png" alt="Calculator Website" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Page 06: Image Gallery -->
-        <div class="book-page" data-index="5">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">06</div>
-              <div class="bp-content">
-                <span class="bp-tag">Web App</span>
-                <h3 class="bp-title">Image<br>Gallery</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS, JavaScript, Responsive Design.</p>
-                <a href="https://adityabiswas-in.github.io/AdityaBiswas_Lumiere/" target="_blank" rel="noopener" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777662891/Screenshot_2026-05-02_004421_zdmcbr.png" alt="Image Gallery" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Page 07: AuraBeats Music Player -->
-        <div class="book-page" data-index="6">
-          <div class="book-page-inner">
-            <div class="book-page-front">
-              <div class="bp-number">07</div>
-              <div class="bp-content">
-                <span class="bp-tag">Music Player</span>
-                <h3 class="bp-title">AuraBeats<br>Music Player</h3>
-                <p class="bp-tech-label">Technologies Used</p>
-                <p class="bp-tech">HTML, CSS, JavaScript, Web Audio API.</p>
-                <a href="https://adityabiswas-in.github.io/AdityaBiswas_AuraBeats/" target="_blank" rel="noopener" class="bp-link"><i class="fas fa-external-link-alt"></i> View Live</a>
-              </div>
-              <div class="bp-img-wrap">
-                <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777793605/Screenshot_2026-05-03_130258_uyuobm.png" alt="AuraBeats Music Player" class="bp-img" />
-              </div>
-              <div class="bp-glow"></div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /book-track -->
-
-      <!-- Controls -->
-      <button class="book-btn book-btn-prev" id="book-prev" aria-label="Previous project">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="book-btn book-btn-next" id="book-next" aria-label="Next project">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-
-      <!-- Dots -->
-      <div class="book-dots" id="book-dots">
-        <button class="book-dot active" data-idx="0" aria-label="Project 1"></button>
-        <button class="book-dot" data-idx="1" aria-label="Project 2"></button>
-        <button class="book-dot" data-idx="2" aria-label="Project 3"></button>
-        <button class="book-dot" data-idx="3" aria-label="Project 4"></button>
-        <button class="book-dot" data-idx="4" aria-label="Project 5"></button>
-        <button class="book-dot" data-idx="5" aria-label="Project 6"></button>
-        <button class="book-dot" data-idx="6" aria-label="Project 7"></button>
       </div>
 
-    </div><!-- /book-carousel -->
+      <!-- Project 02: Luxury E-Commerce -->
+      <div class="project-card tilt-card reveal" data-category="webapp"
+           data-title="Luxury E-Commerce Website"
+           data-tag="Web App"
+           data-tech="HTML, CSS, JavaScript"
+           data-link="https://the-archive-luxury.netlify.app/"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528188/Screenshot_2026-04-18_202426_yg3enu.png"
+           data-desc="A high-end luxury e-commerce application featuring product catalog management, interactive shopping cart, checkout forms, and rich visual branding."
+           data-features="Dynamic shopping cart state;Product filter and search queries;Interactive checkout process;Stunning glassmorphic item cards">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528188/Screenshot_2026-04-18_202426_yg3enu.png" alt="E-Commerce Website" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Web App</span>
+            <h3 class="project-card-title">Luxury E-Commerce</h3>
+            <p class="project-card-tech">HTML, CSS, JavaScript</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 03: College Management Dashboard -->
+      <div class="project-card tilt-card reveal" data-category="dashboard"
+           data-title="College Management Dashboard"
+           data-tag="Dashboard"
+           data-tech="HTML, CSS, JavaScript, Responsive Design"
+           data-link="https://adityabiswas-in.github.io/AdityaBiswas_Collage-Management-Dashboard/"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528942/college_dashboard_project_wpsemb.png"
+           data-desc="A feature-rich administrative dashboard designed for colleges to manage student databases, course schedules, attendance sheets, and academic reports."
+           data-features="Interactive chart visualizations;Database CRUD simulations;Clean sidebar navigation structure;Mobile-responsive table views">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528942/college_dashboard_project_wpsemb.png" alt="College Management Dashboard" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Dashboard</span>
+            <h3 class="project-card-title">Management Dashboard</h3>
+            <p class="project-card-tech">HTML, CSS, JS, Responsive</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 04: Developer Portfolio -->
+      <div class="project-card tilt-card reveal" data-category="website"
+           data-title="Developer Portfolio"
+           data-tag="Portfolio"
+           data-tech="HTML, CSS, JavaScript, Responsive Design, Interactive UI"
+           data-link="#hero"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528941/Portfolio_image_nhrkdv.png"
+           data-desc="The current interactive developer portfolio featuring advanced 3D tilting card effects, dynamic themes, and smooth interactive elements."
+           data-features="Dynamic theme color switcher;3D interactive card tilts;Real-time JARVIS portfolio assistant;Fluid layout scroll reveal elements">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1776528941/Portfolio_image_nhrkdv.png" alt="Developer Portfolio" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Portfolio</span>
+            <h3 class="project-card-title">Developer Portfolio</h3>
+            <p class="project-card-tech">HTML, CSS, JS, Interactive</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 05: Lumiere Image Gallery -->
+      <div class="project-card tilt-card reveal" data-category="webapp"
+           data-title="Lumiere Image Gallery"
+           data-tag="Web App"
+           data-tech="HTML, CSS, JavaScript, Responsive Design"
+           data-link="https://adityabiswas-in.github.io/AdityaBiswas_Lumiere/"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777662891/Screenshot_2026-05-02_004421_zdmcbr.png"
+           data-desc="An elegant web image gallery showcasing high-resolution art and photography with category filters, dynamic lightboxes, and smooth hover effects."
+           data-features="Dynamic category filtering;Premium lightbox zoom view;Fluid responsive bento grid;Interactive image details overlays">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777662891/Screenshot_2026-05-02_004421_zdmcbr.png" alt="Image Gallery" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Web App</span>
+            <h3 class="project-card-title">Lumiere Image Gallery</h3>
+            <p class="project-card-tech">HTML, CSS, JS, Responsive</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 06: Calculator Website -->
+      <div class="project-card tilt-card reveal" data-category="dashboard"
+           data-title="Calculator Website"
+           data-tag="Web Tool"
+           data-tech="HTML, CSS, JavaScript"
+           data-link="https://adityabiswas-in.github.io/AdityaBiswas_Calculator/"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777716535/Screenshot_2026-05-02_153817_do3khn.png"
+           data-desc="A clean web-based scientific calculator with support for standard arithmetic operations, keyboard inputs, and responsive layout."
+           data-features="Dynamic result display screen;Keyboard input binding;History log of calculations;Neomorphic interactive buttons">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777716535/Screenshot_2026-05-02_153817_do3khn.png" alt="Calculator Website" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Web Tool</span>
+            <h3 class="project-card-title">Interactive Calculator</h3>
+            <p class="project-card-tech">HTML, CSS, JavaScript</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 07: College Website Replica -->
+      <div class="project-card tilt-card reveal" data-category="website"
+           data-title="College Website Replica"
+           data-tag="Website"
+           data-tech="HTML, CSS"
+           data-link="https://adityabiswas-in.github.io/AdityaBiswas_Collage-Website-Replica/"
+           data-img="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777468076/Screenshot_2026-04-29_182537_boj1rz.png"
+           data-desc="A pixel-perfect replica of a collegiate academic website, designed to showcase clean structured information presentation, typography systems, and responsive layout foundations."
+           data-features="Clean semantic HTML5 structure;Structured academic department layouts;Responsive drop-down navigation menus;Cross-browser style consistency">
+        <div class="project-card-inner">
+          <div class="project-img-container">
+            <img src="https://res.cloudinary.com/dhrjq4xgv/image/upload/v1777468076/Screenshot_2026-04-29_182537_boj1rz.png" alt="College Website Replica" class="project-card-img" />
+            <div class="project-img-overlay">
+              <span class="project-view-btn"><i class="fas fa-search-plus"></i> View Details</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-tag-capsule">Website</span>
+            <h3 class="project-card-title">College Website Replica</h3>
+            <p class="project-card-tech">HTML, CSS</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /projects-grid -->
   </div>
 </section>
 
@@ -2151,6 +2163,47 @@
     </div>
     <div class="resume-img-wrap" id="resume-img-wrap" style="padding: 0; display: block;">
       <iframe src="Aditya_Biswas_Resume.pdf" class="resume-iframe" id="resume-iframe"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PROJECT DETAILS MODAL ══════════ -->
+<div id="project-details-overlay" class="project-details-overlay" onclick="closeProjectDetails(event)">
+  <div class="project-details-container" onclick="event.stopPropagation()">
+    <div class="project-details-header">
+      <span><i class="fas fa-project-diagram"></i> Project Details</span>
+      <button class="project-details-close" onclick="closeProjectDetails(event)" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="project-details-body">
+      <div class="project-details-grid">
+        <div class="project-details-left">
+          <div class="project-details-img-wrap">
+            <img id="project-details-img" src="" alt="Project Preview" />
+          </div>
+        </div>
+        <div class="project-details-right">
+          <div class="project-details-meta">
+            <span id="project-details-tag" class="project-tag-capsule"></span>
+            <h2 id="project-details-title"></h2>
+            <div id="project-details-tech" class="project-details-tech"></div>
+          </div>
+          <div class="project-details-description">
+            <h3>Project Description</h3>
+            <p id="project-details-desc"></p>
+          </div>
+          <div class="project-details-features">
+            <h3>Key Features</h3>
+            <ul id="project-details-features-list"></ul>
+          </div>
+          <div class="project-details-footer">
+            <a id="project-details-link" href="" target="_blank" rel="noopener" class="btn-primary btn-hud">
+              <i class="fas fa-external-link-alt"></i> Visit Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

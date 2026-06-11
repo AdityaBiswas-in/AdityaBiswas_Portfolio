@@ -119,110 +119,108 @@ function applyTilt(el, e, settings = { max: 10, perspective: 900 }) {
 }
 
 /* ══════════════════════════════════════════
-   BOOK CAROUSEL — General
+   PROJECTS FILTER & DETAILS MODAL
    ══════════════════════════════════════════ */
-(function initBookCarousels() {
-  const carousels = document.querySelectorAll('.book-carousel');
-  if (!carousels.length) return;
+(function initProjectsGrid() {
+  const filterButtons = document.querySelectorAll('.projects-filter-bar .filter-btn');
+  const projectCards = document.querySelectorAll('.projects-grid .project-card');
+  const overlay = document.getElementById('project-details-overlay');
 
-  carousels.forEach(carousel => {
-    const track    = carousel.querySelector('.book-track');
-    const prevBtn  = carousel.querySelector('.book-btn-prev');
-    const nextBtn  = carousel.querySelector('.book-btn-next');
-    const dotBtns  = carousel.querySelectorAll('.book-dot');
-    const pages    = carousel.querySelectorAll('.book-page');
-    if (!track || !pages.length) return;
+  if (!projectCards.length) return;
 
-    let current   = 0;
-    const total   = pages.length;
-    let autoTimer = null;
-    let isPaused  = false; // true while cursor is over the carousel
+  // 1. Filtering Logic
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons and add to this one
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    /* ── slide to index ── */
-    function goTo(idx, dir) {
-      if (idx === current) return;
+      const filterValue = btn.getAttribute('data-filter');
 
-      /* Remove old entrance class from all pages */
-      pages.forEach(p => p.classList.remove('entering-right', 'entering-left'));
+      projectCards.forEach(card => {
+        const category = card.getAttribute('data-category');
 
-      current = (idx + total) % total;
-
-      /* Translate track */
-      track.style.transform = `translateX(-${current * 100}%)`;
-
-      /* Trigger entrance animation on incoming page */
-      void pages[current].offsetWidth; // force reflow
-      pages[current].classList.add(dir === 'right' ? 'entering-right' : 'entering-left');
-      setTimeout(() => pages[current].classList.remove('entering-right', 'entering-left'), 750);
-
-      /* Update dots */
-      if(dotBtns.length) {
-        dotBtns.forEach((d, i) => d.classList.toggle('active', i === current));
-      }
-    }
-
-    /* ── auto-advance every 8 seconds ── */
-    function startAuto() {
-      clearInterval(autoTimer); // always clear first to avoid stacking
-      if (!isPaused) {
-        autoTimer = setInterval(() => goTo(current + 1, 'right'), 8000);
-      }
-    }
-
-    if(prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1, 'left');  startAuto(); });
-    if(nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1, 'right'); startAuto(); });
-
-    if(dotBtns.length) {
-      dotBtns.forEach((btn, i) => {
-        btn.addEventListener('click', () => { goTo(i, i > current ? 'right' : 'left'); startAuto(); });
+        if (filterValue === 'all' || category === filterValue) {
+          // Show card with fade animation
+          card.classList.remove('hidden');
+          setTimeout(() => {
+            card.classList.remove('fade-out');
+            card.classList.add('fade-in');
+          }, 10);
+        } else {
+          // Hide card with fade animation
+          card.classList.remove('fade-in');
+          card.classList.add('fade-out');
+          // Add hidden class after fade-out transition completes
+          setTimeout(() => {
+            if (card.classList.contains('fade-out')) {
+              card.classList.add('hidden');
+            }
+          }, 350);
+        }
       });
-    }
-
-    /* ── Touch / Swipe ── */
-    let touchStartX = 0;
-    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend',   e => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) {
-        dx < 0 ? goTo(current + 1, 'right') : goTo(current - 1, 'left');
-        startAuto();
-      }
-    }, { passive: true });
-
-    /* ── Pause on hover — reliable with isPaused flag ── */
-    carousel.addEventListener('mouseenter', () => {
-      isPaused = true;
-      clearInterval(autoTimer);
-      autoTimer = null;
     });
-    carousel.addEventListener('mouseleave', () => {
-      isPaused = false;
-      startAuto(); // only starts a fresh timer when truly leaving
-    });
-
-    startAuto();
   });
 
-  /* ── Keyboard - navigate visible carousel ── */
-  document.addEventListener('keydown', (e) => {
-    let visibleCarousel = null;
-    carousels.forEach(c => {
-      const rect = c.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        if(!visibleCarousel || Math.abs(rect.top) < Math.abs(visibleCarousel.getBoundingClientRect().top)) {
-           visibleCarousel = c;
-        }
-      }
-    });
+  // 2. Modal Details Logic
+  projectCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const title = card.getAttribute('data-title');
+      const tag = card.getAttribute('data-tag');
+      const tech = card.getAttribute('data-tech');
+      const link = card.getAttribute('data-link');
+      const img = card.getAttribute('data-img');
+      const desc = card.getAttribute('data-desc');
+      const featuresRaw = card.getAttribute('data-features') || '';
 
-    if (visibleCarousel) {
-      const nextBtn  = visibleCarousel.querySelector('.book-btn-next');
-      const prevBtn  = visibleCarousel.querySelector('.book-btn-prev');
-      if (e.key === 'ArrowRight' && nextBtn) { nextBtn.click(); }
-      if (e.key === 'ArrowLeft' && prevBtn)  { prevBtn.click(); }
-    }
+      // Populate elements
+      document.getElementById('project-details-title').textContent = title;
+      document.getElementById('project-details-tag').textContent = tag;
+      document.getElementById('project-details-tech').textContent = tech;
+      document.getElementById('project-details-desc').textContent = desc;
+      
+      const imgEl = document.getElementById('project-details-img');
+      imgEl.src = img;
+      imgEl.alt = title;
+
+      const linkEl = document.getElementById('project-details-link');
+      if (link && link !== '#' && link.startsWith('http')) {
+        linkEl.href = link;
+        linkEl.style.display = 'inline-flex';
+      } else {
+        linkEl.style.display = 'none';
+      }
+
+      // Populate features
+      const featuresList = document.getElementById('project-details-features-list');
+      featuresList.innerHTML = '';
+      if (featuresRaw) {
+        const features = featuresRaw.split(';');
+        features.forEach(feat => {
+          if (feat.trim()) {
+            const li = document.createElement('li');
+            li.textContent = feat.trim();
+            featuresList.appendChild(li);
+          }
+        });
+      }
+
+      // Open Modal
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // prevent background scrolling
+    });
   });
 })();
+
+// Close project details modal function (globally accessible)
+function closeProjectDetails(e) {
+  const overlay = document.getElementById('project-details-overlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = ''; // restore scrolling
+  }
+}
+
 
 /* ══════════════════════════════════════════
    3D TILT — Skill Logo Cards
@@ -465,6 +463,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeBioModal();
     closeResumeModal();
+    closeProjectDetails();
   }
 });
 
