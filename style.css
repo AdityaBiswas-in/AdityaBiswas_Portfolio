@@ -597,7 +597,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  z-index: 0;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -615,14 +615,12 @@ section {
   z-index: 1;
   pointer-events: auto;
   cursor: pointer;
-  transition: filter 0.4s ease;
 }
 
 .about-reactor-svg {
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 0 25px var(--glow)) drop-shadow(0 0 50px color-mix(in srgb, var(--purple-lt) 30%, transparent));
-  transition: filter 0.4s ease;
 }
 
 .arc-rotate-cw {
@@ -6140,10 +6138,19 @@ footer {
   height: clamp(520px, 48vw, 860px);
   transform: translateY(-50%);
   opacity: 0.46;
-  z-index: 0;
+  z-index: 3;
 }
 
-#about .about-reactor-container,
+#about .about-reactor-container {
+  left: auto;
+  right: 0;
+  top: 50%;
+  width: clamp(520px, 48vw, 860px);
+  height: clamp(520px, 48vw, 860px);
+  transform: translate(0, -50%);
+  pointer-events: auto;
+}
+
 #about .about-pulse-rings {
   left: auto;
   right: 0;
